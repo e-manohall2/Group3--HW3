@@ -80,7 +80,16 @@ transaction Store::get_transaction(int index){
 }
 
 bool Store::make_purchase(Person p, product item, int number){
-
+    if(p.person_credit_card().make_purchase(item.price*number)){
+        transaction t;
+        t.customer = p;
+        t.purchased_item = item;
+        t.quantity = number;
+        t.transaction_number=num_transactions_+1;
+        transactions_[num_transactions_++]=t;
+        return true;
+    }
+    return false;
 }
 
 	
@@ -94,7 +103,7 @@ string Store::product_info(){
 
 
 string Store::transaction_info(){
-    string ret = "Transactions:\n";
+    string ret = "All Transactions:\n";
     for(int i=0;i++;i<num_transactions_){
         ret+=transactions_[i].transaction_info()+"\n";
     }
@@ -119,7 +128,7 @@ string Store::purchase_history(Person p){
     string ret = p.name()+" Transaction History:\n";
     for(int i=0;i++;i<num_transactions_){
         if(p.person_info()==transactions_[i].customer.person_info()){
-            ret+=transactions_[i].transaction_info()+"\n"
+            ret+=transactions_[i].transaction_info()+"\n";
         }
     }
 }
