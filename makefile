@@ -1,25 +1,20 @@
-CC=g++
-V =-std=c++11
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -Wextra
 
-all:  main.o
-	$(CC) $(V) main.o -o a.out 
-main: address.o credit_card.o person.o store.o product.o transaction.o
-	$(CC) -c $(V) main.cpp
+OBJECTS = main.o address.o credit_card.o person.o store.o product.o transaction.o
+DEPS = $(OBJECTS:.o=.d)
 
-address: address.cpp
-	$(CC) $(V) address.cpp -c
+all: a.out
 
-credit_card: credit_card.cpp
-	$(CC) $(V) credit_card.cpp -c
-product: product.cpp
-	$(CC) $(V) product.cpp -c
+a.out: $(OBJECTS)
+	$(CXX) $(OBJECTS) -o a.out
 
-person: person.cpp address.out
-	$(CC) $(V) person.cpp -c
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-transaction: transaction.cpp person.o
-	$(CC) $(V) transaction.cpp -clean
-store: store.cpp product.o transaction.o person.o
-	$(CC) $(V) store.cpp -c
-clean: 
-	rm -f *.o 
+-include $(DEPS)
+
+clean:
+	rm -f $(OBJECTS) $(DEPS) a.out
+
+.PHONY: all clean
