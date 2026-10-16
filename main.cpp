@@ -22,6 +22,9 @@ using std::getline;
 int main()
 {
 
+	cout.setf(std::ios::fixed);
+	cout.setf(std::ios::showpoint);
+	cout.precision(2);
 
 	// create the store array
 
@@ -192,8 +195,8 @@ int main()
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
 	// randomly choose between 11 and 99 purchase attempts
-	int attemptCount = std::rand() % 89 + 11;
-
+	// int attemptCount = std::rand() % 89 + 11;
+	int attemptCount = 5;
 	cout << "\nSimulating " << attemptCount << " Transactions:\n\n" << endl;
 
 	for (int i = 0; i < attemptCount; i++){
