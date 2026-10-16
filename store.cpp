@@ -95,7 +95,7 @@ bool Store::make_purchase(Person p, product item, int number){
 	
 string Store::product_info(){
     string ret = "Products:\n";
-    for(int i=0;i++;i<num_products_){
+    for(int i=0;i<num_products_;i++){
         ret+=products_[i].product_info()+"\n";
     }
     return ret;
@@ -104,7 +104,7 @@ string Store::product_info(){
 
 string Store::transaction_info(){
     string ret = "All Transactions:\n";
-    for(int i=0;i++;i<num_transactions_){
+    for(int i=0;i<num_transactions_;i++){
         ret+=transactions_[i].transaction_info()+"\n";
     }
     return ret;
@@ -112,7 +112,7 @@ string Store::transaction_info(){
 
 string Store::customer_info(){
     string ret = "Customers:\n";
-    for(int i=0;i++;i<num_customers_){
+    for(int i=0;i<num_customers_;i++){
         ret+=customers_[i].person_info()+"\n";
     }
     return ret;
@@ -126,16 +126,17 @@ string Store::store_info(){
 
 string Store::purchase_history(Person p){
     string ret = p.name()+" Transaction History:\n";
-    for(int i=0;i++;i<num_transactions_){
+    for(int i=0;i<num_transactions_;i++){
         if(p.person_info()==transactions_[i].customer.person_info()){
             ret+=transactions_[i].transaction_info()+"\n";
         }
     }
+    return ret;
 }
 
 
 int Store::find_customer(Person cust){
-    for(int i=0;i++;i<num_customers_){
+    for(int i=0;i<num_customers_;i++){
         if(customers_[i].person_info()==cust.person_info()){
             return i;
         }
