@@ -89,6 +89,7 @@ bool Store::make_purchase(Person p, product item, int number){
         t.quantity = number;
         t.transaction_number=num_transactions_+1;
         transactions_[num_transactions_++]=t;
+        customers_[find_customer(p)]=p;
         return true;
     }
     return false;
@@ -139,7 +140,7 @@ string Store::purchase_history(Person p){
 
 int Store::find_customer(Person cust){
     for(int i=0;i<num_customers_;i++){
-        if(customers_[i].person_info()==cust.person_info()){
+        if(customers_[i].name()==cust.name()){
             return i;
         }
     }
