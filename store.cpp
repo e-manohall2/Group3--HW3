@@ -131,6 +131,7 @@ string Store::purchase_history(Person p){
             ret+=transactions_[i].transaction_info()+"\n";
         }
     }
+    return ret;
 }
 
 

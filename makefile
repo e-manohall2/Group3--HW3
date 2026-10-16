@@ -3,23 +3,23 @@ V =-std=c++11
 
 all:  main.o
 	$(CC) $(V) main.o -o a.out 
-main: address.o credit_card.o person.o store.o product.o transaction.o
+main.o: address.o credit_card.o person.o store.o product.o transaction.o
 	$(CC) -c $(V) main.cpp
 
-address: address.cpp
+address.o: address.cpp
 	$(CC) $(V) address.cpp -c
 
-credit_card: credit_card.cpp
+credit_card.o: credit_card.cpp
 	$(CC) $(V) credit_card.cpp -c
-product: product.cpp
+product.o: product.cpp
 	$(CC) $(V) product.cpp -c
 
-person: person.cpp address.out
+person.o: person.cpp address.o
 	$(CC) $(V) person.cpp -c
 
-transaction: transaction.cpp person.o
-	$(CC) $(V) transaction.cpp -clean
-store: store.cpp product.o transaction.o person.o
+transaction.o: transaction.cpp person.o
+	$(CC) $(V) transaction.cpp -c
+store.o: store.cpp product.o transaction.o person.o
 	$(CC) $(V) store.cpp -c
 clean: 
 	rm -f *.o 
