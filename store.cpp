@@ -80,7 +80,9 @@ transaction Store::get_transaction(int index){
 }
 
 bool Store::make_purchase(Person p, product item, int number){
-    if(p.person_credit_card().make_purchase(item.price*number)){
+    credit_card card = p.person_credit_card();
+    if(card.make_purchase(item.price*number)){
+        p.person_credit_card(card);  
         transaction t;
         t.customer = p;
         t.purchased_item = item;
